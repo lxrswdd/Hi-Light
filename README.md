@@ -3,8 +3,8 @@
 git clone 
 cd 
 
-conda create -n Vlight python=3.10
-conda activate Vlight
+conda create -n Slight python=3.10
+conda activate Slight
 
 pip install -r requirements.txt
 ```
@@ -50,7 +50,7 @@ If you find our work helpful for your research, please consider giving a star â­
 
 ## ðŸ“£ Disclaimer
 
-This is the official code of .
+This is the official code of Slight.
 All the copyrights of some of the demo videos are from community users. 
 Feel free to contact us if you would like to remove them.
 
