@@ -1,3 +1,4 @@
+## Installation
 ```
 git clone 
 cd 
@@ -8,7 +9,7 @@ conda activate Vlight
 pip install -r requirements.txt
 ```
 
-## 🎈 Quick Start
+##  Quick Start
 ## Input Video specification
 
 The framework supports the Wan2.1 backbone supporting frame numbers of 49 and 81.
