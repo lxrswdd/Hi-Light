@@ -21,7 +21,8 @@ python ./tool/split_long_video.py --input_video_path './demo/demo.mp4' --output_
 ```
 
 
-### To perform the video relighting pipeline, change the following path to yours and edit the prompts in the yaml configuration file.
+### To perform the video relighting pipeline
+### Change the following path to yours and edit the prompts in the yaml configuration file.
 ```bash
 # relight
 raw_input_video = 'Change to your video path' ### Change this to your input video segment path. Must be 49 frames.
@@ -33,12 +34,7 @@ python run_relight.py
 ```
 
 
-### Perform video relighting with Wan2.1
-Wan2.1 with Flow-Matching scheduler.
-The VDM checkpoint is [Wan2.1-T2V-1.3B-Diffusers](https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B-Diffusers) and it will be downloaded automatically.
-```bash
-python lav_wan_relight.py --config "configs/wan_relight/bear.yaml"
-```
+
 
 ## 📎 Citation 
 
