@@ -24,12 +24,12 @@ python ./tool/split_long_video.py --input_video_path './demo/demo.mp4' --output_
 ### To perform the video relighting pipeline
 ### Change the following path to yours and edit the prompts in the yaml configuration file.
 ```bash
-# relight
-raw_input_video = 'Change to your video path' ### Change this to your input video segment path. Must be 49 frames.
+# path
+raw_input_video = 'Change to your video path' ### Change this to your input video segment path. Set to 49 or 81 frames.
 yaml_config_file = 'change to your yaml' ### Change this to your YAML config file path.
 out_dir = 'Change this to your output directory.' 
 
-
+# run script
 python run_relight.py
 ```
 
