@@ -9,16 +9,24 @@ pip install -r requirements.txt
 ```
 
 ## 🎈 Quick Start
+## Input Video specification
 
-### Perform video relighting with customized illumination control
+The framework supports the Wan2.1 backbone supporting frame numbers of 49 and 81.
+
+### To split a long video into video segments of the desired number of frames and fps
+
+```
+python ./tool/split_long_video.py 
+```
+
+
+### Perform video relighting pipeline with customized illumination control
 ```bash
 # relight
 python lav_relight.py --config "configs/relight/car.yaml"
 ```
 
-## Video specification
 
-The framework supports the Wan2.1 backbone supporting frame numbers of 49 and 81.
 
 
 ### Update Diffusers from source
@@ -41,12 +49,7 @@ python lav_wan_relight.py --config "configs/wan_relight/bear.yaml"
 
 If you find our work helpful for your research, please consider giving a star ⭐ and citation 📝 
 ```bibtex
-@article{zhou2025light,
-  title={Light-A-Video: Training-free Video Relighting via Progressive Light Fusion},
-  author={Zhou, Yujie and Bu, Jiazi and Ling, Pengyang and Zhang, Pan and Wu, Tong and Huang, Qidong and Li, Jinsong and Dong, Xiaoyi and Zang, Yuhang and Cao, Yuhang and others},
-  journal={arXiv preprint arXiv:2502.08590},
-  year={2025}
-}
+
 ```
 
 ## 📣 Disclaimer
