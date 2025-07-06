@@ -56,7 +56,7 @@ Feel free to contact us if you would like to remove them.
 
 ## 💞 Acknowledgements
 The code is built upon the following repositories. We thank all the contributors for open-sourcing.
-* [Light-A-_](https://github.com/lllyasviel/IC-Light)
+* [Light-A-Video](https://github.com/bcmi/Light-A-Video)
 * [IC-Light](https://github.com/lllyasviel/IC-Light)
 * [AnimateDiff](https://github.com/guoyww/AnimateDiff)
 * [CogVideoX](https://github.com/THUDM/CogVideo)
