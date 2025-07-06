@@ -34,7 +34,12 @@ python run_relight.py
 ```
 
 
-
+### To get the newest/dev diffusers version 
+```
+git clone https://github.com/huggingface/diffusers.git
+cd diffusers
+pip install .
+```
 
 ## 📎 Citation 
 
