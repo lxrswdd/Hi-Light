@@ -17,7 +17,7 @@ The framework supports the Wan2.1 backbone supporting frame numbers of 49 and 81
 ### To split a long video into video segments of the desired number of frames and fps
 
 ```
-python ./tool/split_long_video.py --input_video_path './demo/demo.mp4' --output_folder './input/81frames_24fps/' --frames_per_segment 81 --target_fps 24
+python ./tool/split_long_video.py --input_video_path './demo/man_taking_notes.mp4' --output_folder './input/81frames_24fps/' --frames_per_segment 81 --target_fps 24
 ```
 
 
