@@ -59,7 +59,6 @@ The code is built upon the following repositories. We thank all the contributors
 * [Light-A-Video](https://github.com/bcmi/Light-A-Video)
 * [IC-Light](https://github.com/lllyasviel/IC-Light)
 * [AnimateDiff](https://github.com/guoyww/AnimateDiff)
-* [CogVideoX](https://github.com/THUDM/CogVideo)
 * [Wan2.1](https://github.com/Wan-Video/Wan2.1)
 
 
