@@ -1,0 +1,15 @@
+n_prompt: "bad quality, worse quality"
+vdm_prompt: "a woman holding a phone and a cup of coffee"
+relight_prompt: "neon light"
+video_path: "/scratch/xiangrui/project/video_edit/Light-A-Video/input_wan/portrait/downsized/woman_holding_a_phone_1.mp4"
+bg_source: "LEFT"  ## LEFT, RIGHT, BOTTOM, TOP
+save_path: "output"
+
+width: 480
+height: 640
+num_frames: 49
+strength: 0.7
+gamma: 0.7
+num_step: 25
+text_guide_scale: 2
+seed: 422
