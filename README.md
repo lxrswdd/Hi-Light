@@ -12,7 +12,7 @@ pip install -r requirements.txt
 ##  Quick Start
 ## Input Video specification
 
-The framework supports the Wan2.1 backbone supporting frame numbers of 49 and 81.
+The framework adopts the Wan2.1 backbone, supporting frame numbers of 49 and 81.
 
 ### 1. To split a long video into video segments of the desired number of frames and fps
 
