@@ -14,14 +14,14 @@ pip install -r requirements.txt
 
 The framework supports the Wan2.1 backbone supporting frame numbers of 49 and 81.
 
-### To split a long video into video segments of the desired number of frames and fps
+### 1. To split a long video into video segments of the desired number of frames and fps
 
 ```
 python ./utils/split_long_video.py --input_video_path './demo/man_taking_notes.mp4' --output_folder './input/81frames_24fps/' --frames_per_segment 81 --target_fps 24
 ```
 
 
-### To run the video relighting pipeline: Change the following path to yours and edit the prompts in the yaml configuration file.
+### 2. To run the video relighting pipeline: Change the following path to yours and edit the prompts in the yaml configuration file.
 ```bash
 # path
 raw_input_video = 'Change to your video path' ### Change this to your input video segment path. Set to 49 or 81 frames.
@@ -31,7 +31,10 @@ out_dir = 'Change this to your output directory.'
 # run script
 python run_relight.py
 ```
-
+### 3. To evaluate the relit video
+```
+python relit_video_evaluation.py --raw_video_path "Path to your raw input video" --relit_video_path "Path to the relit video"
+```
 
 ### To get the newest/dev diffusers version 
 ```
