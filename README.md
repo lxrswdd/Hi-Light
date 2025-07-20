@@ -14,6 +14,8 @@ pip install -r requirements.txt
 
 The framework adopts the Wan2.1 backbone, supporting frame numbers of 49 and 81.
 
+Ensure the video has a smallest resolution of 480p.
+
 ### 1. To split a long video into video segments of the desired number of frames and fps
 
 ```
