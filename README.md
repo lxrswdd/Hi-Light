@@ -62,7 +62,6 @@ Feel free to contact us if you would like to remove them.
 The code is built upon the following repositories. We thank all the contributors for open-sourcing.
 * [Light-A-Video](https://github.com/bcmi/Light-A-Video)
 * [IC-Light](https://github.com/lllyasviel/IC-Light)
-* [AnimateDiff](https://github.com/guoyww/AnimateDiff)
 * [Wan2.1](https://github.com/Wan-Video/Wan2.1)
 
 
