@@ -1,7 +1,7 @@
 
 <table class="center">
     <tr>
-<!--       <td><p style="text-align: center">Input video</p></td> -->
+      <td><p style="text-align: center">Input video</p></td>
       <td><p style="text-align: center">sunset lighting over sea</p></td>
     </tr>
     <tr>
