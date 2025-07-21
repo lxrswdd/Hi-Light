@@ -1,3 +1,23 @@
+
+<table class="center">
+    <tr>
+      <td><p style="text-align: center">Input video</p></td>
+      <td><p style="text-align: center">sunset lighting over sea</p></td>
+    </tr>
+    <tr>
+      <td><img src="__assets__/sea_gull_1.gif"></td>
+      <td><img src="__assets__/sea_gull_1_sunset.gif"></td>
+    </tr>
+    <tr>
+<!--       <td><p style="text-align: center">..., sunlight through the blinds</p></td> -->
+      <td><p style="text-align: center">green aurora lighting</p></td>
+    </tr>
+    <tr>
+      <td><img src="__assets__/woman.gif"></td>
+      <td><img src="__assets__/woman_aurora.gif"></td>
+    </tr>
+</table>
+
 ## Installation
 ```
 git clone 
