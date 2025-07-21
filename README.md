@@ -1,3 +1,23 @@
+
+<table class="center">
+    <tr>
+      <td><p style="text-align: center">..., red and blue neon light</p></td>
+      <td><p style="text-align: center">..., sunset over sea</p></td>
+    </tr>
+    <tr>
+      <td><img src="__assets__/sea_gull_1.gif"></td>
+      <td><img src="__assets__/sea_gull_1_sunset.gif"></td>
+    </tr>
+    <tr>
+      <td><p style="text-align: center">..., sunlight through the blinds</p></td>
+      <td><p style="text-align: center">..., in the forest, magic golden lit</p></td>
+    </tr>
+    <tr>
+      <td><img src="__assets__/man_light.gif"></td>
+      <td><img src="__assets__/water_light.gif"></td>
+    </tr>
+</table>
+
 ## Installation
 ```
 git clone 
