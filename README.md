@@ -1,8 +1,8 @@
 
 <table class="center">
     <tr>
-      <td><p style="text-align: center">..., red and blue neon light</p></td>
-      <td><p style="text-align: center">..., sunset over sea</p></td>
+      <td><p style="text-align: center">Input video</p></td>
+      <td><p style="text-align: center">sunset lighting over sea</p></td>
     </tr>
     <tr>
       <td><img src="__assets__/sea_gull_1.gif"></td>
