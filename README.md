@@ -13,8 +13,8 @@
       <td><p style="text-align: center">green aurora lighting</p></td>
     </tr>
     <tr>
-      <td><img src="__assets__/woman.gif"></td>
-      <td><img src="__assets__/woman_aurora.gif"></td>
+      <td><img src="__assets__/1440p_woman"></td>
+      <td><img src="__assets__/1440p_woman_aurora"></td>
     </tr>
 </table>
 
