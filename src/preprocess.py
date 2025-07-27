@@ -130,23 +130,27 @@ def downsize_video(input_path, output_path,width=480, height=640):
     """
 
     # one of the attribute has to be 480p 
-    assert width == 480 or height == 480, "One of the dimensions (height or width) must be 480p ."
+    assert width == 480 or height == 480 or width == 512, "One of the dimensions (height or width) must be 480p . or 512 x 512"
     filename = os.path.basename(input_path)
-    cap = cv2.VideoCapture(input_path)
+    # asset that the input video exists
+    if not os.path.exists(input_path):
+        raise FileNotFoundError(f"Input video {input_path} does not exist.")
+    else:
+        cap = cv2.VideoCapture(input_path)
 
-    fps = cap.get(cv2.CAP_PROP_FPS)
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Or 'XVID', etc.
-    
-    out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
-    
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret:
-            break
-        resized = cv2.resize(frame, (width, height))
-        out.write(resized)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Or 'XVID', etc.
+        
+        out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
+        
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                break
+            resized = cv2.resize(frame, (width, height))
+            out.write(resized)
 
-    cap.release()
-    out.release()
-    print(f"Saved downsized video to: {output_path}")
-    return output_path
+        cap.release()
+        out.release()
+        print(f"Saved downsized video to: {output_path}")
+        return output_path

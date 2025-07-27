@@ -420,6 +420,12 @@ class WanVideoToVideoPipeline(DiffusionPipeline):
         latent_height = height // self.vae_scale_factor_spatial
         latent_width = width // self.vae_scale_factor_spatial
 
+        #debug 1
+        print('input video shape:',video.shape)
+        print('[DEBUG 1] num_latent_frames calculated:',num_latent_frames)
+
+
+
         shape = (
             batch_size,
             num_channels_latents,
@@ -427,6 +433,7 @@ class WanVideoToVideoPipeline(DiffusionPipeline):
             latent_height,
             latent_width,
         )
+
         init_latents = [retrieve_latents(self.vae.encode(vid.unsqueeze(0)), generator) for vid in video]
         init_latents = torch.cat(init_latents, dim=0).to(dtype)
         
@@ -444,6 +451,7 @@ class WanVideoToVideoPipeline(DiffusionPipeline):
         noise = randn_tensor(shape, generator=generator, device=device, dtype=dtype)
         latents = self.scheduler.scale_noise(init_latents, timestep, noise)
         
+        print('[DEBUG 1.2] prepared latents shape:', latents.shape)
         return latents
     
     def encode_latents(self, video: torch.Tensor) -> torch.Tensor:
@@ -626,11 +634,11 @@ class WanVideoToVideoPipeline(DiffusionPipeline):
         if latents is None:
             video = self.video_processor.preprocess_video(video, height=height, width=width)
             video = video.to(device=device, dtype=prompt_embeds.dtype)
-            org_target = video
-
-        # 5. Prepare latent variables
+            
+        # 5. Prepare latent variables 
         num_channels_latents = self.transformer.config.in_channels
         
+        #===================================初始化噪声===================================
         latents = self.prepare_latents(
             video,
             batch_size * num_videos_per_prompt,
@@ -644,6 +652,9 @@ class WanVideoToVideoPipeline(DiffusionPipeline):
             latents,
             latent_timestep,
         )
+        #==============================================================================
+
+
 
         #################### Relighter ###################
         from src.ic_light import Relighter
@@ -674,6 +685,7 @@ class WanVideoToVideoPipeline(DiffusionPipeline):
                 ## init the step
                 self.scheduler._init_step_index(timestep)
 
+                # running diffusion
                 noise_pred = self.transformer(
                     hidden_states=latent_model_input,
                     timestep=timestep,
@@ -698,24 +710,33 @@ class WanVideoToVideoPipeline(DiffusionPipeline):
                     
                     ## get pred_x0
                     sigma = self.scheduler.sigmas[self.scheduler.step_index]
-                    pred_x0_latent = latents - sigma * noise_pred 
-                    consist_target = self.decode_latents(pred_x0_latent) 
-                    
-                    ## detail compensation
-                    if i == 0:
-                        detail_diff = org_target - consist_target
-                    consist_target = consist_target + lbd * detail_diff
+                    # print('='*20)
+                    # print('[DEBUG 2] latent shape:',latents.shape)
+                    # print('noise_pred shape:', noise_pred.shape)
+                    # print('='*20)
+                    if latents.shape != noise_pred.shape:
+                        raise ValueError(f"Latents shape {latents.shape} does not match noise_pred shape {noise_pred.shape}.")
+                    pred_x0_latent = latents - sigma * noise_pred  # Estimate original video from noisy latents
+                    consist_target = self.decode_latents(pred_x0_latent)   # Decode latents to pixel space
                     
                     consist_target = rearrange(consist_target, "1 c f h w -> f c h w")
-                    relight_target = relighter(consist_target) 
-                    
-                    fusion_target = consist_target + lbd * (relight_target - consist_target)    
+                    relight_target = relighter(consist_target)  # Apply relighting effect to each frame
+                    # print('='*20)
+                    # print(f"relight_target shape: {relight_target.shape}")
+                    # print('='*20)
+
+
+                    # Blend original video with relit version using progressive factor lbd
+                    fusion_target = consist_target + lbd * (relight_target - consist_target)     #I_fused = I_original +lamba*(I_relight - I_original)
                     fusion_target = rearrange(fusion_target, "f c h w -> 1 c f h w")
                     
-                    fusion_target = self.encode_latents(fusion_target) 
-                    output = wan_flowmatch_step(self.scheduler, noise_pred, t, latents, fusion_target, return_dict=False)
+                    fusion_target = self.encode_latents(fusion_target)     # Re-encode blended result to latent space
+
+                    output = wan_flowmatch_step(self.scheduler, noise_pred, t, latents, fusion_target, return_dict=False)     # Update latents using flow matching step, guiding toward relit target
+
                 else:
-                    output = self.scheduler.step(noise_pred, t, latents, return_dict=False)
+                    output = self.scheduler.step(noise_pred, t, latents, return_dict=False)   # For later steps, just use normal diffusion without relighting guidance
+
 
                 latents = output[0]
 

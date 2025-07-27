@@ -14,7 +14,8 @@
 
 import inspect
 from typing import Any, Callable, Dict, List, Optional, Union
-
+import imageio,os
+os.sys.path.append("/scratch/xiangrui/project/video_edit/Light-A-Video")
 import torch
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer, CLIPVisionModelWithProjection
 
@@ -683,6 +684,7 @@ class AnimateDiffVideoToVideoPipeline(
                     for i in range(batch_size)
                 ]
             else:
+                ## torch.Size([1, 16, 3, 512, 512])
                 init_latents = [self.encode_video(vid, generator, decode_chunk_size).unsqueeze(0) for vid in video]
 
             init_latents = torch.cat(init_latents, dim=0)
@@ -935,11 +937,17 @@ class AnimateDiffVideoToVideoPipeline(
         # 5. Prepare latent variables
         if latents is None:
             video = self.video_processor.preprocess_video(video, height=height, width=width)
+            print(f"video shape = {video.shape}")
+            if video.shape[2] > 32:
+                video = video[:, :, :32]
+            print(f"video shape = {video.shape}")
+
+            # Move the number of frames before the number of channels.
             video = video.permute(0, 2, 1, 3, 4)
-            video = video.to(device=device, dtype=prompt_embeds.dtype)
+            video = video.to(device=device, dtype=prompt_embeds.dtype) ## torch.Size([1, 16, 3, 512, 512])
             org_target = rearrange(video, "1 f c h w -> 1 c f h w")
         num_channels_latents = self.unet.config.in_channels
-        latents = self.prepare_latents(
+        latents = self.prepare_latents( ## torch.Size([1, 4, 16, 64, 64])
             video=video,
             height=height,
             width=width,
@@ -1010,7 +1018,7 @@ class AnimateDiffVideoToVideoPipeline(
                         noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_text - noise_pred_uncond)
 
                     lbd = 1 - i/(num_inference_steps-1)
-                    
+                    print(f"lbd = {lbd}")
                     if lbd>0.15:
                         ## get pred_x
                         sigma = self.scheduler.sigmas[self.scheduler.step_index]
@@ -1019,24 +1027,75 @@ class AnimateDiffVideoToVideoPipeline(
                         ## consistent target
                         consist_target = self.decode_latents(pred_x0_latent) 
                         
+
+                        #=========detail compensation==========
                         if i == 0:
                             detail_diff = org_target - consist_target
-                            
+                        #=========detail compensation==========
+
                         consist_target = consist_target + lbd * detail_diff
+
+
                         consist_target = rearrange(consist_target, "1 c f h w -> f c h w") 
                         
+                        #========ablation on consist target===========
+                        ablation_save = True
+                        save_dir = '/scratch/xiangrui/project/video_edit/Light-A-Video/lxr_ablation/plf/may27/demo'
+                        os.makedirs(save_dir, exist_ok=True)
+                        if ablation_save:
+                            save_path = os.path.join(save_dir,'consist', f"consist_target_{i}.mp4")
+                            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+                            # relight_video = self.video_processor.postprocess_video(video=relight_target, output_type=output_type)
+                            print(f"relight_video shape = {consist_target.shape}")
+                            consist_target_rearranged = consist_target.permute(0, 2, 3, 1)
+                            imageio.mimwrite(save_path, consist_target_rearranged.cpu().numpy(), fps=8)
+                        #========ablation on consist target end===========
+
+
+                        print('consist_target shape = ', consist_target.shape) # (frame, channel, height, width)
+                        print("org_target shape = ", org_target.shape) # (1, 3, 32, 512, 512)
                         ## relight target
                         relight_target = relighter(consist_target) 
-                        
-                        print(f"relight lbd = {lbd}")
-                        fusion_target = (1 - lbd) * consist_target + lbd * relight_target  
 
-                        ## fusion_target -> pixel level
+                        # ========ablation on relighting the original video===========
+                        org_target2 = rearrange(org_target, "1 c f h w -> f c h w")
+                        # relight_target = relighter(org_target2) 
+
+                        #========ablation on not using plf===========
+                        if ablation_save:
+                            save_path = os.path.join(save_dir,'plf0_cla1', f"relight_target_{i}.mp4")
+                            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+                            # relight_video = self.video_processor.postprocess_video(video=relight_target, output_type=output_type)
+                            print(f"relight_video shape = {relight_target.shape}")
+                            relight_target_rearranged = relight_target.permute(0, 2, 3, 1)
+                            imageio.mimwrite(save_path, relight_target_rearranged.cpu().numpy(), fps=8)
+                        #========ablation on not using plf end===========
+                        
+                        #*********source codes********
+                        print(f"relight lbd = {lbd}")
+                        fusion_target = (1 - lbd) * consist_target + lbd * relight_target   # pixel level
+                        #*******************************
+
+
+                        #========ablation on using orginal video for plf===========
+                        # fusion_target = (1 - lbd) * org_target2 + lbd * relight_target 
+                        #========ablation on using orginal video for plf end===========
+
+
+                        #========ablation===========
+                        if ablation_save:
+                            fusion_target_rearranged = fusion_target.permute(0, 2, 3, 1)
+                            save_path = os.path.join(save_dir,'plf1_cla1', f"fusion_target_{i}.mp4")
+                            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+                            imageio.mimwrite(save_path, fusion_target_rearranged.cpu().numpy(), fps=8)
+                        #========ablation end========
+
+                        ## fusion_target -> latent space
                         fusion_latent = self.vae.encode(fusion_target).latent_dist.mode() * self.vae.config.scaling_factor
                         fusion_latent = fusion_latent.to(consist_target.dtype)
                         fusion_latent = rearrange(fusion_latent, "f c h w -> 1 c f h w")
                         
-                        output = eul_step(self.scheduler, noise_pred, t, latents, fusion_latent, self, **extra_step_kwargs) 
+                        output = eul_step(self.scheduler, noise_pred, t, latents, fusion_latent, self, **extra_step_kwargs) # Research.
                         
                     else:
                         output = self.scheduler.step(noise_pred, t, latents, **extra_step_kwargs)
@@ -1059,3 +1118,4 @@ class AnimateDiffVideoToVideoPipeline(
             return (video,)
 
         return AnimateDiffPipelineOutput(frames=video)
+    

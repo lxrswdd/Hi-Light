@@ -685,6 +685,7 @@ class AnimateDiffVideoToVideoPipeline(
                     for i in range(batch_size)
                 ]
             else:
+                ## torch.Size([1, 16, 3, 512, 512])
                 init_latents = [self.encode_video(vid, generator, decode_chunk_size).unsqueeze(0) for vid in video]
 
             init_latents = torch.cat(init_latents, dim=0)
@@ -953,10 +954,10 @@ class AnimateDiffVideoToVideoPipeline(
         ## foreground mask
         mask_tensor = torch.from_numpy(np.stack(mask, axis=0)).float() / 255
         mask_tensor = mask_tensor.movedim(-1, 1).to(latents.device, dtype=latents.dtype)
-        mask_latent = F.interpolate(mask_tensor, size=(latents.shape[-2], latents.shape[-1]), mode='bilinear')
+        mask_latent = F.interpolate(mask_tensor, size=(latents.shape[-2], latents.shape[-1]), mode='bilinear') # torch.Size([16, 3, 64, 64])
         mask_latent[mask_latent!=1.0] = 0
         mask_latent = mask_latent[:,:1]
-        mask_latent = mask_latent.repeat(1, 4, 1, 1).to(latents.dtype).permute(1, 0, 2, 3).unsqueeze(0)
+        mask_latent = mask_latent.repeat(1, 4, 1, 1).to(latents.dtype).permute(1, 0, 2, 3).unsqueeze(0) ## torch.Size([1, 4, 16, 64, 64])
         mask_latent = mask_latent.to(device)
 
         ## Init Relighter
@@ -997,7 +998,7 @@ class AnimateDiffVideoToVideoPipeline(
                     latent_model_input = self.scheduler.scale_model_input(latent_model_input, t)
 
                     # predict the noise residual
-                    noise_pred = self.unet(
+                    noise_pred = self.unet( ## torch.Size([1, 4, 16, 64, 64])
                         latent_model_input,
                         t,
                         encoder_hidden_states=prompt_embeds,
@@ -1013,7 +1014,7 @@ class AnimateDiffVideoToVideoPipeline(
                     latent_model_input = self.scheduler.scale_model_input(latent_model_input, t)
 
                     # predict the noise residual
-                    noise_pred = self.unet(
+                    noise_pred = self.unet( ## torch.Size([1, 4, 16, 64, 64])
                         latent_model_input,
                         t,
                         encoder_hidden_states=prompt_embeds_wo_negative,
@@ -1029,10 +1030,10 @@ class AnimateDiffVideoToVideoPipeline(
                         
                         ## get pred_x
                         sigma = self.scheduler.sigmas[self.scheduler.step_index]
-                        pred_x0_latent = latents - sigma * noise_pred 
+                        pred_x0_latent = latents - sigma * noise_pred ## torch.Size([1, 4, 16, 64, 64])
                         
                         ## consistent target
-                        consist_target = self.decode_latents(pred_x0_latent)
+                        consist_target = self.decode_latents(pred_x0_latent)  ## torch.Size([1, 3, 16, 512, 512])
                         consist_target = rearrange(consist_target, "1 c f h w -> f c h w")
                         
                         ## add diff
@@ -1042,8 +1043,8 @@ class AnimateDiffVideoToVideoPipeline(
                         consist_target = consist_target + lbd * (mask_tensor * detail_diff)
                         
                         ## relight target
-                        relight_target = relighter(consist_target)
-                        fusion_target = (1 - lbd) * consist_target + lbd * relight_target
+                        relight_target = relighter(consist_target) ## torch.Size([16, 3, 512, 512])
+                        fusion_target = (1 - lbd) * consist_target + lbd * relight_target  ## torch.Size([16, 3, 512, 512])
 
                         ## fusion_target -> pixel level
                         fusion_latent = self.vae.encode(fusion_target).latent_dist.mode() * self.vae.config.scaling_factor

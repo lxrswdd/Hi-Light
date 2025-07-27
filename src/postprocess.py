@@ -32,7 +32,8 @@ def upsample_video(input_path, output_path, width, height):
 
 
 
-def _transfer_detail_spatial(original_frame, relighted_frame, strength):
+
+def _transfer_detail_spatial(original_frame, relighted_frame, strength, blend_mode='weighted_sum',transfer_mode='light'):
     """
     Helper function containing the core logic to transfer detail between two single frames.
     This is extracted from the previous script to keep the main loop clean.
@@ -60,10 +61,34 @@ def _transfer_detail_spatial(original_frame, relighted_frame, strength):
 
     detail_layer = original_L_float - blurred_L
 
-    # Add the detail to the relighted luminance channel
-    # enhanced_L_float = relighted_L_float + (detail_layer * strength)
+    if transfer_mode =='light':
+        # Choose blending method based on blend_mode parameter
+        if blend_mode == 'weighted_sum':
+            # Original method: weighted sum addition
+            enhanced_L_float = original_L_float + (blurred_relighted_L * strength)
+            
+        elif blend_mode == 'absolute_scaling':
+            # Option 1: Direct scaling using normalized relighted values
+            scale_factor = (blurred_relighted_L / 255.0) * strength + (1.0 - strength)
+            enhanced_L_float = original_L_float * scale_factor
+            
+        elif blend_mode == 'ratio_scaling':
+            # Option 2: Ratio-based scaling
+            # Avoid division by zero
+            safe_blurred_L = np.maximum(blurred_L, 1.0)
+            ratio = blurred_relighted_L / safe_blurred_L
+            # Blend the scaling with strength parameter
+            final_ratio = ratio * strength + (1.0 - strength)
+            enhanced_L_float = original_L_float * final_ratio
+            
+        else:
+            raise ValueError(f"Unknown blend_mode: {blend_mode}. Choose from 'weighted_sum', 'absolute_scaling', or 'ratio_scaling'")
+        
+    elif transfer_mode=='detail':
+                # Choose blending method based on blend_mode parameter
 
-    enhanced_L_float = original_L_float + (blurred_relighted_L * strength)
+            enhanced_L_float = relighted_L_float + (detail_layer * strength)
+
     enhanced_L = np.clip(enhanced_L_float, 0, 255).astype(np.uint8)
 
     # Recombine channels and convert back to BGR
@@ -74,11 +99,18 @@ def _transfer_detail_spatial(original_frame, relighted_frame, strength):
 
 def LAB_merge(
     video1_path, video2_path, output_path,
-    strength
+    strength=0.8, blend_mode='weighted_sum',transfer_mode='light'
 ):
     """
     Processes two videos frame-by-frame, transferring detail from video 1 to video 2,
     and saves the result as a new video file.
+    
+    Args:
+        video1_path: Path to source video (detail source)
+        video2_path: Path to target video (to enhance)
+        output_path: Path for output video
+        strength: Blending strength (0.0 to 1.0)
+        blend_mode: Blending method - 'weighted_sum', 'absolute_scaling', or 'ratio_scaling'
     """
     # --- Step 1: Open Video Captures ---
     cap1 = cv2.VideoCapture(video1_path) # Source of detail
@@ -90,17 +122,6 @@ def LAB_merge(
     if not cap2.isOpened():
         print(f"Error: Could not open target video: {video2_path}")
         return
-
-    # Dimensions
-    w1, h1 = int(cap1.get(cv2.CAP_PROP_FRAME_WIDTH)),  int(cap1.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    w2, h2 = int(cap2.get(cv2.CAP_PROP_FRAME_WIDTH)),  int(cap2.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    assert (w1, h1) == (w2, h2), f"Dimension mismatch: {(w1,h1)} vs {(w2,h2)}"
-
-    # Frame counts
-    n1, n2 = int(cap1.get(cv2.CAP_PROP_FRAME_COUNT)), int(cap2.get(cv2.CAP_PROP_FRAME_COUNT))
-    assert n1 == n2, f"Frame count mismatch: {n1} vs {n2}"
-    # assert the videos have the same dimensions and number of frames
-
 
     # --- Step 2: Get Properties and Create Video Writer ---
     # Use properties from the target video for the output
@@ -117,7 +138,7 @@ def LAB_merge(
     # Define the codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'mp4v') # Use 'mp4v' for .mp4 files
     out_writer = cv2.VideoWriter(output_path, fourcc, fps, (frame_width, frame_height))
-    print(f"Output video will be saved to '{output_path}' with {fps:.2f} FPS.")
+    print(f"Output video will be saved to '{output_path}' with {fps:.2f} FPS using '{blend_mode}' blending.")
 
     # --- Step 3: The Main Processing Loop ---
     current_frame_idx = 0
@@ -145,7 +166,7 @@ def LAB_merge(
             break
             
         # --- Step 4: Perform Detail Transfer ---
-        enhanced_frame = _transfer_detail_spatial(original_frame, relighted_frame, strength)
+        enhanced_frame = _transfer_detail_spatial(original_frame, relighted_frame, strength, blend_mode)
         
         # --- Step 5: Write Frame to Output Video ---
         out_writer.write(enhanced_frame)
@@ -212,27 +233,38 @@ if __name__ == '__main__':
                     video1_path=raw_video,
                     video2_path=relighted_video,
                     output_path=output_path,
-                    strength=0.3
+                    strength=0.3,
+                    blend_mode = 'ratio_scaling'
                 )
 
-                output_root = f'{out_dir}/strength5'
-                output_path = os.path.join(output_root, folder_name, output_name)
-                os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
-                LAB_merge(
-                    video1_path=raw_video,
-                    video2_path=relighted_video,
-                    output_path=output_path,
-                    strength=0.5
-                )
+def brightness_scaling(input_path, output_path,brightness_factor =1.3,saturation_factor=1.1):
 
-                output_root = f'{out_dir}/strength7'
-                output_path = os.path.join(output_root, folder_name, output_name)
-                os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    # Setup
+    cap = cv2.VideoCapture(input_path)
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
 
-                LAB_merge(
-                    video1_path=raw_video,
-                    video2_path=relighted_video,
-                    output_path=output_path,
-                    strength=0.7
-                )
+    # Processing
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        # Scale brightness
+        bright = np.clip(frame.astype(np.float32) * brightness_factor, 0, 255).astype(np.uint8)
+
+        # Scale saturation
+        hsv = cv2.cvtColor(bright, cv2.COLOR_BGR2HSV).astype(np.float32)
+        hsv[..., 1] *= saturation_factor
+        hsv[..., 1] = np.clip(hsv[..., 1], 0, 255)
+        enhanced = cv2.cvtColor(hsv.astype(np.uint8), cv2.COLOR_HSV2BGR)
+
+        out.write(enhanced)
+
+    # Cleanup
+    cap.release()
+    out.release()
