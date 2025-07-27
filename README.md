@@ -66,9 +66,8 @@ python relit_video_evaluation.py --raw_video_path "Path to your raw input video"
 
 ### To get the newest/dev diffusers version 
 ```
-git clone https://github.com/huggingface/diffusers.git
-cd diffusers
-pip install .
+pip install git+https://github.com/huggingface/diffusers.git
+
 ```
 
 ## 📎 Citation 
