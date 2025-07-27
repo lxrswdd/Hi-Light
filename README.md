@@ -1,7 +1,9 @@
-
 ## 💡 Demo
-[![]](https://github.com/user-attachments/assets/636ff26c-788a-472d-9878-cac69292343f)
-
+<p align="center">
+  <a href="https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c">
+    <img src="https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c" alt="Demo Video" />
+  </a>
+</p>
 
 <table class="center">
     <tr>
