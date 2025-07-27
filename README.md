@@ -1,9 +1,9 @@
 ## 💡 Demo
-<p align="center">
-  <a href="https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c">
-    <img src="https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c" alt="Demo Video" />
-  </a>
-</p>
+<div align="center">
+
+[![]](https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c)
+
+</div>
 
 <table class="center">
     <tr>
@@ -40,7 +40,7 @@ pip install -r requirements.txt
 
 The framework adopts the Wan2.1 backbone, supporting frame numbers of 49 and 81.
 
-Ensure the video has a smallest resolution of 480p.
+Ensure the video has a resolution >= 480p.
 
 ### 1. To split a long video into video segments of the desired number of frames and fps
 
