@@ -38,7 +38,7 @@ pip install -r requirements.txt
 ##  Quick Start
 ## Input Video specification
 
-The framework adopts the Wan2.1 backbone, supporting frame numbers of 49 and 81.
+The framework adopts the Wan2.1 and CogVideoX diffusion backbones, supporting frame numbers of 49 and 81.
 
 Ensure the video has a resolution >= 480p.
 
