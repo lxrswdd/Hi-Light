@@ -25,6 +25,7 @@
 </table>
 
 ## Installation
+We used Python 3.10.16
 ```
 git clone 
 cd 
