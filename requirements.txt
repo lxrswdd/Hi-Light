@@ -1,9 +1,10 @@
-diffusers==0.33.0.dev0
+diffusers==0.33.0
 transformers==4.48.0
 opencv-python==4.11.0.86
-safetensors
+huggingface-hub==0.29.3
+safetensors=0.5.3
 pillow==10.3.0
-einops
+einops=0.8.1
 peft==0.15.0
 imageio==2.37.0
 omegaconf
