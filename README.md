@@ -65,11 +65,7 @@ python run_relight.py
 python relit_video_evaluation.py --raw_video_path "Path to your raw input video" --relit_video_path "Path to the relit video"
 ```
 
-### To get the newest/dev diffusers version 
-```
-pip install git+https://github.com/huggingface/diffusers.git
 
-```
 
 ## 📎 Citation 
 
@@ -81,7 +77,7 @@ If you find our work helpful for your research, please consider giving a star �
 ## 📣 Disclaimer
 
 This is the official code of Slight.
-The the copyrights of some of the demo videos are from community users. 
+The opyrights of some of the demo videos are from community users. 
 Feel free to contact us if you would like to remove them.
 
 ## 💞 Acknowledgements
