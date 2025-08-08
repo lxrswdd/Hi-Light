@@ -30,8 +30,8 @@ We used Python 3.10.16
 git clone 
 cd 
 
-conda create -n Slight python=3.10
-conda activate Slight
+conda create -n HiLight python=3.10
+conda activate HiLight
 
 pip install -r requirements.txt
 ```
