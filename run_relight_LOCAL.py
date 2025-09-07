@@ -1,12 +1,8 @@
-
 import yaml
-import random
 import cv2
 import numpy as np
 import subprocess
 import os
-import tempfile
-import shutil
 from tqdm import tqdm
 from datetime import datetime
 import time
@@ -41,7 +37,7 @@ def print_progress(step, total_steps, description):
     progress = f"[{step}/{total_steps}]"
     print(f"\n{progress} {description}")
 
-def update_yaml_video_path(yaml_file_path, new_video_path,out_dir,new_dim,fps):
+def update_yaml_video_path(yaml_file_path, new_video_path,out_dir,new_dim,fps,num_frames):
     """
     Update the video_path attribute in the YAML configuration file
     """
@@ -56,6 +52,7 @@ def update_yaml_video_path(yaml_file_path, new_video_path,out_dir,new_dim,fps):
         config['fps'] = fps  # Update the fps if needed
         config['width'] = new_dim[0]
         config['height']= new_dim[1]  # Update the video size if needed
+        config['num_frames'] = num_frames
         print(f'Updated video_path in YAML to: {new_video_path}')
         
         # Write back to the YAML file
@@ -68,16 +65,18 @@ def update_yaml_video_path(yaml_file_path, new_video_path,out_dir,new_dim,fps):
         print(f'Error updating YAML file: {e}')
         raise
 
+
 def run_relighting(out_dir,yaml_config_file,fps,vdm):
 
     # Define the path to your original script
-    if vdm == 'wan':
-        your_main_script = './lav_wan_relight.py' # Assuming your main code is in main.py
+    if vdm == 'wan21':
+        your_main_script = './lav_wan_relight.py'
     elif vdm == 'animatediff':
         your_main_script = './lav_relight.py'
     elif vdm == 'cog':
         your_main_script = './lav_cog_relight.py'
-    
+    elif vdm =='wan22':
+        your_main_script = './lav_wan_relight_wan22.py'
     base_config_template_path = yaml_config_file
 
     # Base output directory where all relighted results will be saved
@@ -124,73 +123,97 @@ def run_relighting(out_dir,yaml_config_file,fps,vdm):
 if __name__ == "__main__":
 
     
-    raw_input_video = '/scratch/xiangrui/project/video_edit/Light-A-Video/input_wan/portrait/81frames_24fps_split/girl_window_6.mp4' ### Change this to your input video segment path. Must be 49 frames.
+    raw_input_video = '/scratch/xiangrui/project/video_edit/Light-A-Video/input_wan/portrait/raw/woman_cry.mp4' ### Change this to your input video segment path. Must be 49 frames.
 
     video_name = os.path.splitext(os.path.basename(raw_input_video))[0]
-    yaml_config_file = '/scratch/xiangrui/project/video_edit/Light-A-Video/configs/wan_relight/girl_window.yaml' ### Change this to your YAML config file path.
-    vdm = 'wan'# VDM backbone 'wan' or 'animatediff' or "cog"
-    out_dir = f'/scratch/xiangrui/project/video_edit/Light-A-Video/test_out/non-portrait/{video_name}_{vdm}' ### Change this to your output directory.
+    yaml_config_file = '/scratch/xiangrui/project/video_edit/Light-A-Video/configs/wan_relight/woman_cry.yaml' ### Change this to your YAML config file path.
+    vdm = 'wan21'# VDM backbone 'wan21' or 'animatediff' or "cog"
 
-    os.makedirs(out_dir, exist_ok=True)
-    cap = cv2.VideoCapture(raw_input_video)
-    raw_video_size = (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-    fps= int(cap.get(cv2.CAP_PROP_FPS))
-    cap.release()
 
     # Configuration for post-processing
-    merge_strength = 0.5
-
+    merge_strength = 0.3
     smooth = True
     scale_brightness = True
     LAB_transfer_mode = 'light'
     LAB_fuse_mode = 'weighted_sum'
 
-    print_header(f"VIDEO RELIGHTING PIPELINE - VDM: {vdm.upper()}")
-    print_info("Input Video", raw_input_video)
-    print_info("Output Directory", out_dir)
-    print_info("Original Video Size", f"{raw_video_size[0]}x{raw_video_size[1]}")
-    print_info("FPS", fps)
-    
-    # Step 1: Downsize the original video
+    saturation_factor = 2
+    brightness_factor = 1.2
+
+
+    cap = cv2.VideoCapture(raw_input_video)
+    raw_video_size = (
+        int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
+        int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    )
+    fps = int(cap.get(cv2.CAP_PROP_FPS))
+    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))  # total number of frames
+    cap.release()
+
+    out_dir = f'/scratch/xiangrui/project/video_edit/Light-A-Video/test_out/{vdm}/{video_name}_{frame_count}frames' ### Change this to your output directory.
+    os.makedirs(out_dir, exist_ok=True)
+
+
+    def print_config_block(title: str, **items):
+        width = max(len(k) for k in items)
+        line = "=" * 120
+        print("\n" + line)
+        print(f"{title}".center(120))
+        print("-" * 120)
+        for k, v in items.items():
+            print(f"{k:<{width}} : {v}")
+        print(line + "\n")
+
+    print_config_block(
+        title=f"VIDEO RELIGHTING PIPELINE  |  VDM: {vdm.upper()}",
+        VDM=vdm,
+        Input_Video=raw_input_video,
+        Output_Directory=out_dir,
+        Original_Video_Size=f"{raw_video_size[0]}x{raw_video_size[1]}",
+        FPS=fps,
+        Merge_Strength=merge_strength,
+        Smooth=smooth,
+        Scale_Brightness=scale_brightness,
+        LAB_Transfer_Mode=LAB_transfer_mode,
+        LAB_Fuse_Mode=LAB_fuse_mode,
+        Saturation_Factor=saturation_factor,
+        Brightness_Factor=brightness_factor,
+    )
+
     print_progress(1, 5, "DOWNSIZING VIDEO")
-    print_subheader("Downsampling the video dimensions for VDM")
+    print_subheader("Downsampling the video dimensions")
 
-    if vdm == "animatediff":
+w, h = raw_video_size
+orientation = None
+
+if vdm == "animatediff":
+    downsizing_width = downsizing_height = 512
+
+elif vdm in {"cog", "wan21", "wan22"}:
+    # width > height
+    if w > h:
+        if vdm == "cog":
+            downsizing_width, downsizing_height = 720, 480
+        elif vdm == "wan21":
+            downsizing_width, downsizing_height = 848, 480
+        else:  # wan22
+            downsizing_width, downsizing_height = 832, 480
+        orientation = "Landscape"
+
+    # width < height
+    elif w < h:
+        if vdm == "cog":
+            downsizing_width, downsizing_height = 480, 720
+        elif vdm == "wan21":
+            downsizing_width, downsizing_height = 480, 848
+        else:  # wan22
+            downsizing_width, downsizing_height = 480, 832
+        orientation = "Portrait"
+
+    # width == height
+    else:
         downsizing_width = downsizing_height = 512
-        print_info("VDM Type", "AnimateDiff")
-        print_info("Target Resolution", "512x512 (square)")
-
-    elif vdm == "cog":
-        if raw_video_size[0] > raw_video_size[1]:  # width > height
-            downsizing_width = 720
-            downsizing_height = 480
-            orientation = "Landscape"
-        elif raw_video_size[0] < raw_video_size[1]:  # width < height
-            downsizing_width = 480
-            downsizing_height = 720
-            orientation = "Portrait"
-        print_info("VDM Type", "CogVideoX")
-        print_info("Orientation", orientation)
-        print_info("Target Resolution", f"{downsizing_width}x{downsizing_height}")
-
-    elif vdm == "wan":
-        if raw_video_size[0] > raw_video_size[1]:  # width > height
-            downsizing_width = 848
-            downsizing_height = 480
-            orientation = "Landscape"
-        elif raw_video_size[0] < raw_video_size[1]:  # width < height
-            downsizing_width = 480
-            downsizing_height = 848
-            orientation = "Portrait"
-        print_info("VDM Type", "WAN")
-        print_info("Orientation", orientation)
-        print_info("Target Resolution", f"{downsizing_width}x{downsizing_height}")
-
-    else:  # width == height
-        downsizing_width = 512
-        downsizing_height = 512
-        print_info("VDM Type", "Default")
-        print_info("Target Resolution", "512x512 (square)")
+    
 
     print_info("Processing", "Downsizing video...")
     downsized_dir = os.path.join(out_dir, 'Intermediate_downsized_video.mp4')
@@ -214,8 +237,8 @@ if __name__ == "__main__":
     print_info("Status", "Updating configuration to yaml file...")
     # Update YAML file with the downsized video path
     update_yaml_video_path(yaml_config_file, downsized_video_dir, out_dir, 
-                          new_dim=(downsizing_width, downsizing_height), fps=fps)
-    
+                          new_dim=(downsizing_width, downsizing_height), fps=fps, num_frames=frame_count)
+
     print_info("Status", "Running relighting model...")
     run_relighting(out_dir=out_dir, yaml_config_file=yaml_config_file, fps=fps, vdm=vdm)
     
@@ -225,7 +248,6 @@ if __name__ == "__main__":
     print_success(f"Step 2 Complete - Relighting applied")
     print_info("Output Path", relighted_video_path, indent=4)
     print_info("Processing Time", f"{processing_time:.2f} seconds", indent=4)
-
 
 
     # Step 3: Upsample the size of the relighted video to match the original video
@@ -268,21 +290,21 @@ if __name__ == "__main__":
 
     final_merged_video = os.path.join(out_dir, 'FINAL_original_merged_video.mp4')
 
-    src.postprocess.LAB_merge(
-        video1_path=raw_input_video, 
-        video2_path=restored_video_path, 
-        output_path=final_merged_video,
-        strength=merge_strength,
-        blend_mode=LAB_fuse_mode,
-        transfer_mode=LAB_transfer_mode
-    )
+    if not smooth:
+        src.postprocess.LAB_merge(
+            video1_path=raw_input_video, 
+            video2_path=restored_video_path, 
+            output_path=final_merged_video,
+            strength=merge_strength,
+            blend_mode=LAB_fuse_mode,
+            transfer_mode=LAB_transfer_mode
+        )
+        print_info("Output Path", final_merged_video, indent=4)
 
-    print_success("Step 4 Complete - LAB merge applied")
-    print_info("Output Path", final_merged_video, indent=4)
 
     if smooth:
-        print_info("Status", "Applying LAB merge to smoothed version...")
-        post_upsample_merged_path = os.path.join(out_dir, 'FINAL_smooth_video_.mp4')
+        print_info("Status", "Applying LAB-DF to smoothed version...")
+        post_upsample_merged_path = os.path.join(out_dir, f'FINAL_smooth_MS{merge_strength}.mp4')
         src.postprocess.LAB_merge(
             video1_path=raw_input_video, 
             video2_path=post_upsample_stable_out_path, 
@@ -292,40 +314,34 @@ if __name__ == "__main__":
             transfer_mode=LAB_transfer_mode
         )
         print_success("LAB merge applied to smoothed version")
-        print_info("Smoothed Merged Output", post_upsample_merged_path, indent=4)
+        print_info("Smoothed Video Output", post_upsample_merged_path, indent=4)
+
+    print_success("Step 4 Complete - LAB-DF applied")
 
     # Step 5: Brightness and saturation scaling (optional)
     if scale_brightness:
         print_progress(5, 5, "BRIGHTNESS & SATURATION SCALING")
-        print_subheader("Enhancing final video appearance")
-        
-        brightness_factor = 1.3
-        if vdm == 'wan':
-            saturation_factor = 1.3
-        elif vdm == 'animatediff':
-            saturation_factor = 1.1
-        else:
-            saturation_factor = 1.3
-            
+        print_subheader("Enhancing final video appearance")   
         print_info("Brightness Factor", f"{brightness_factor}x")
         print_info("Saturation Factor", f"{saturation_factor}x")
         print_info("Status", "Scaling brightness and saturation...")
         
-        brightness_scaled_unsmoothed_video_out = os.path.join(out_dir, 'FINAL_scaled_unsmoothed_video.mp4')
+        if not smooth:
+            brightness_scaled_unsmoothed_video_out = os.path.join(out_dir, 'FINAL_scaled_unsmoothed_video.mp4')
 
-        src.postprocess.brightness_scaling(
-            input_path=final_merged_video,
-            output_path=brightness_scaled_unsmoothed_video_out,
-            brightness_factor=brightness_factor,
-            saturation_factor=saturation_factor
-        )
+            src.postprocess.brightness_scaling(
+                input_path=final_merged_video,
+                output_path=brightness_scaled_unsmoothed_video_out,
+                brightness_factor=brightness_factor,
+                saturation_factor=saturation_factor
+            )
 
-        print_success("Brightness scaling applied to unsmoothed version")
-        print_info("Output Path", brightness_scaled_unsmoothed_video_out, indent=4)
+            print_success("Brightness scaling applied to unsmoothed version")
+            print_info("Output Path", brightness_scaled_unsmoothed_video_out, indent=4)
 
         if smooth:
             print_info("Status", "Scaling smoothed version...")
-            brightness_scaled_video_out = os.path.join(out_dir, 'FINAL_scaled_smoothed_video.mp4')
+            brightness_scaled_video_out = os.path.join(out_dir, f'FINAL_smoothed_brt{brightness_factor}_sat{saturation_factor}_video.mp4')
 
             src.postprocess.brightness_scaling(
                 input_path=post_upsample_merged_path,
@@ -342,12 +358,12 @@ if __name__ == "__main__":
     print_info("Total Processing Steps", "5/5 completed")
     
     final_outputs = []
+
     if scale_brightness:
         if smooth:
             final_outputs.append(("Final Enhanced Video (Recommended)", 
-                                os.path.join(out_dir, 'FINAL_scaled_smoothed_video.mp4')))
-        final_outputs.append(("Final Enhanced Video (Unsmoothed)", 
-                            brightness_scaled_unsmoothed_video_out))
+                                os.path.join(out_dir, f'FINAL_smoothed_brt{brightness_factor}_sat{saturation_factor}_video.mp4')))
+
     else:
         if smooth:
             final_outputs.append(("Final Merged Video (Smoothed)", post_upsample_merged_path))

@@ -14,7 +14,7 @@ from diffusers import AutoencoderKL, UNet2DConditionModel, DPMSolverMultistepSch
 from diffusers.models.attention_processor import AttnProcessor2_0
 
 from src.ic_light_pipe import StableDiffusionImg2ImgPipeline
-from src.wan_pipe import WanVideoToVideoPipeline
+from src.wan_pipe_original import WanVideoToVideoPipeline
 from src.ic_light import BGSource
 from utils.tools import set_all_seed, read_video
 from diffusers import FlowMatchEulerDiscreteScheduler
@@ -49,12 +49,17 @@ def main(args):
         unet.conv_in = new_conv_in
     unet_original_forward = unet.forward
 
+
+     # source codes 
     def hooked_unet_forward(sample, timestep, encoder_hidden_states, **kwargs):
         c_concat = kwargs['cross_attention_kwargs']['concat_conds'].to(sample)
+
         c_concat = torch.cat([c_concat] * (sample.shape[0] // c_concat.shape[0]), dim=0)
         new_sample = torch.cat([sample, c_concat], dim=1)
         kwargs['cross_attention_kwargs'] = {}
         return unet_original_forward(new_sample, timestep, encoder_hidden_states, **kwargs)
+    
+
     unet.forward = hooked_unet_forward
 
     ## ic-light model loader
@@ -74,6 +79,7 @@ def main(args):
 
     # Consistent light attention
     @torch.inference_mode()
+
     def custom_forward_CLA(self, 
                         hidden_states, 
                         gamma=config.get("gamma", 0.7),
@@ -133,6 +139,7 @@ def main(args):
 
         return hidden_states
 
+
     ### attention
     from types import MethodType
     @torch.inference_mode()
@@ -148,7 +155,10 @@ def main(args):
             if "Attention" in module_name and cond_1 and cond_2:
                 cond_3 = name_split_list[1] 
                 if cond_3 not in "3":
+                    # module.forward = MethodType(custom_forward_CLA, module)
                     module.forward = MethodType(custom_forward_CLA, module)
+
+                    
 
         return unet
 
@@ -193,7 +203,7 @@ def main(args):
     bg_source = BGSource[config.get("bg_source")]
     save_path = config.get("save_path")
     num_frames = config.get("num_frames", 49)
-    
+    fps = config.get("fps", 16)
     ##############################  infer  #####################################
     generator = torch.manual_seed(seed)
     video_name = os.path.basename(video_path)
@@ -221,8 +231,14 @@ def main(args):
 
         frames = output.frames[0]
         frames = (frames * 255).astype(np.uint8)
+        print('***bg_source type****:',type(bg_source))
+        print('***bg_source type****:',type(bg_source.value))
+        print(type(bg_source.value))
+        light_direction = bg_source.value.split(' ')[0]
+        # results_path = f"{save_path}/relight_{light_direction}_{video_name}"
         results_path = f"{save_path}/relight_{video_name}"
-        imageio.mimwrite(results_path, frames, fps=14)
+
+        imageio.mimwrite(results_path, frames, fps=fps)
         print(f"relight! prompt:{relight_prompt}, light:{bg_source.value}, save in {results_path}.")
         
 if __name__ == "__main__":
@@ -231,8 +247,9 @@ if __name__ == "__main__":
     parser.add_argument("--sd_model", type=str, default="stablediffusionapi/realistic-vision-v51")
     parser.add_argument("--vdm_model", type=str, default="Wan-AI/Wan2.1-T2V-1.3B-Diffusers")
     parser.add_argument("--ic_light_model", type=str, default="./models/iclight_sd15_fc.safetensors")
-    
-    parser.add_argument("--config", type=str, default="configs/wan_relight/man.yaml", help="the config file for each sample.")
+    parser.add_argument("--fps", type=int, default="24")
+
+    parser.add_argument("--config", type=str, default="/scratch/xiangrui/project/video_edit/Light-A-Video/configs/wan_relight/man_dancing.yaml", help="the config file for each sample.")
     
     args = parser.parse_args()
     main(args)
