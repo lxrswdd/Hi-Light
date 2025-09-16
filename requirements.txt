@@ -4,7 +4,7 @@ opencv-python==4.11.0.86
 huggingface-hub==0.29.3
 safetensors==0.5.3
 pillow==10.3.0
-einops=0.8.1
+einops==0.8.1
 peft==0.15.0
 imageio==2.37.0
 omegaconf==2.3.0
