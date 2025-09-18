@@ -187,55 +187,6 @@ def LAB_merge(
     cap2.release()
     out_writer.release()
 
-# --- Example Usage ---
-if __name__ == '__main__':
-    # You would replace these with your actual video files
-    # For demonstration, we can use the dummy video creator
-    # _create_dummy_videos() 
-
-
-    raw_video = '/scratch/xiangrui/project/video_edit/Light-A-Video/input_wan/portrait/split/model_1.mp4'
-    raw_name = os.path.splitext(os.path.basename(raw_video))[0]
-    relighted_root = '/scratch/xiangrui/project/video_edit/Light-A-Video/output/portrait/relight_size_restored/jun28'
-
-
-    out_dir = '/scratch/xiangrui/project/video_edit/Light-A-Video/output/portrait/LAB_weighted_BlurrLumiance_original_size/jun29'
-    os.makedirs(out_dir, exist_ok=True)
-
-    for folder_name in os.listdir(relighted_root):
-        folder_path = os.path.join(relighted_root, folder_name)
-        if not os.path.isdir(folder_path):
-            continue
-
-        # Look for a relighted video file that includes the raw video name
-        for file in os.listdir(folder_path):
-            if file.endswith('.mp4') and raw_name in file:
-                relighted_video = os.path.join(folder_path, file)
-                output_name = f'merged_{raw_name}.mp4'
-                
-
-                output_root = f'{out_dir}/strength1'
-                output_path = os.path.join(output_root, folder_name, output_name)
-                os.makedirs(os.path.dirname(output_path), exist_ok=True)
-
-                LAB_merge(
-                    video1_path=raw_video,
-                    video2_path=relighted_video,
-                    output_path=output_path,
-                    strength=0.1
-                )
-                
-                output_root = f'{out_dir}/strength3'
-                output_path = os.path.join(output_root, folder_name, output_name)
-                os.makedirs(os.path.dirname(output_path), exist_ok=True)
-
-                LAB_merge(
-                    video1_path=raw_video,
-                    video2_path=relighted_video,
-                    output_path=output_path,
-                    strength=0.3,
-                    blend_mode = 'ratio_scaling'
-                )
 
 
 def brightness_scaling(input_path, output_path,brightness_factor =1.3,saturation_factor=1.1):
