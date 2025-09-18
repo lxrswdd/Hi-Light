@@ -5,10 +5,10 @@ n_prompt: bad quality, worse quality
 num_frames: 49
 num_step: 25
 relight_prompt: a man dancing, neon light
-save_path: /scratch/xiangrui/project/video_edit/Light-A-Video/test_out/man_taking_notes_12
+save_path: ./test_out/man_taking_notes_12
 seed: 666
 strength: 0.5
 text_guide_scale: 2
 vdm_prompt: a man dancing,
-video_path: /scratch/xiangrui/project/video_edit/Light-A-Video/test_out/man_taking_notes_12/downsized_video.mp4
+video_path:./man_taking_notes_12/downsized_video.mp4
 width: 480
