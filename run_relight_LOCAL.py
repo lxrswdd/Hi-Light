@@ -123,10 +123,10 @@ def run_relighting(out_dir,yaml_config_file,fps,vdm):
 if __name__ == "__main__":
 
     
-    raw_input_video = '/scratch/xiangrui/project/video_edit/Light-A-Video/input_wan/portrait/raw/woman_cry.mp4' ### Change this to your input video segment path. Must be 49 frames.
+    raw_input_video = '' ### Change this to your input video segment path. Must be 49 frames.
 
     video_name = os.path.splitext(os.path.basename(raw_input_video))[0]
-    yaml_config_file = '/scratch/xiangrui/project/video_edit/Light-A-Video/configs/wan_relight/woman_cry.yaml' ### Change this to your YAML config file path.
+    yaml_config_file = './woman_cry.yaml' ### Change this to your YAML config file path.
     vdm = 'wan21'# VDM backbone 'wan21' or 'animatediff' or "cog"
 
 
@@ -150,7 +150,7 @@ if __name__ == "__main__":
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))  # total number of frames
     cap.release()
 
-    out_dir = f'/scratch/xiangrui/project/video_edit/Light-A-Video/test_out/{vdm}/{video_name}_{frame_count}frames' ### Change this to your output directory.
+    out_dir = f'./test_out/{vdm}/{video_name}_{frame_count}frames' ### Change this to your output directory.
     os.makedirs(out_dir, exist_ok=True)
 
 
