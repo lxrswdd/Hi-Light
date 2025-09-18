@@ -249,7 +249,7 @@ if __name__ == "__main__":
     parser.add_argument("--ic_light_model", type=str, default="./models/iclight_sd15_fc.safetensors")
     parser.add_argument("--fps", type=int, default="24")
 
-    parser.add_argument("--config", type=str, default="/scratch/xiangrui/project/video_edit/Light-A-Video/configs/wan_relight/man_dancing.yaml", help="the config file for each sample.")
+    parser.add_argument("--config", type=str, default="./man_dancing.yaml", help="the config file for each sample.")
     
     args = parser.parse_args()
     main(args)
