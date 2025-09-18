@@ -58,7 +58,7 @@ yaml_config_file = 'change to your yaml' ### Change this to your YAML config fil
 out_dir = 'Change this to your output directory.' 
 
 # run script
-python run_relight.py
+python run_relight_LOCAL.py
 ```
 ### 3. To evaluate the relit video
 ```
