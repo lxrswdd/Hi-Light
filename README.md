@@ -55,13 +55,10 @@ python ./utils/split_long_video.py --input_video_path './demo/man_taking_notes.m
 
 ### 2. To run the video relighting pipeline: Change the following path to yours and edit the prompts in the yaml configuration file.
 ```bash
-# path
-raw_input_video = 'Change to your video path' ### Change this to your input video segment path. Set to 49 or 81 frames.
-yaml_config_file = 'change to your yaml' ### Change this to your YAML config file path.
-out_dir = 'Change this to your output directory.' 
 
-# run script
-python run_relight_LOCAL.py
+# run the demo script
+python ./run_relight_Beta.py --raw_input_video ./demo/woman_holding_a_coffee_1.mp4 \
+--config ./configs/wan_relight/woman_holding_a_coffee.yaml
 ```
 ### 3. To evaluate the relit video
 ```
