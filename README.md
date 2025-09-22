@@ -67,17 +67,11 @@ python relit_video_evaluation.py --raw_video_path "Path to your raw input video"
 
 
 
-## 📎 Citation 
-
-If you find our work helpful for your research, please consider giving a star ⭐ and citation 📝 
-```bibtex
-
-```
 
 ## 📣 Disclaimer
 
-This is the official code of Slight.
-The opyrights of some of the demo videos are from community users. 
+This is the official code of Hi-Light.
+The copyrights of some of the demo videos are from community users. 
 Feel free to contact us if you would like to remove them.
 
 ## 💞 Acknowledgements
