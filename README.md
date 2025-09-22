@@ -46,7 +46,10 @@ Ensure the video has a resolution >= 480p.
 ### 1. To split a long video into video segments of the desired number of frames and fps
 
 ```
-python ./utils/split_long_video.py --input_video_path './demo/man_taking_notes.mp4' --output_folder './input/81frames_24fps/' --frames_per_segment 81 --target_fps 24
+python ./utils/split_long_video.py --input_video_path './demo/man_taking_notes.mp4' \
+--output_folder './input/81frames_24fps/' \
+ --frames_per_segment 81 \
+--target_fps 24
 ```
 
 
