@@ -1,7 +1,7 @@
 n_prompt: "bad quality, worse quality"
 vdm_prompt: "a woman holding a phone and a cup of coffee"
 relight_prompt: "green aurora light"
-video_path: "demo/woman_holding_a_phone_1.mp4"
+video_path: "demo/woman_holding_a_coffee_1.mp4"
 bg_source: "LEFT"  ## LEFT, RIGHT, BOTTOM, TOP
 save_path: "output"
 
