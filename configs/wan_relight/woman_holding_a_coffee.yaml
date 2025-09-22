@@ -10,6 +10,6 @@ height: 640
 num_frames: 49
 strength: 0.4
 gamma: 0.7
-num_step: 15
+num_step: 10
 text_guide_scale: 2
 seed: 422
