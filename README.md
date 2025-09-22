@@ -27,8 +27,8 @@
 ## Installation
 We used Python 3.10.16
 ```
-git clone 
-cd 
+git clone "THIS REPO"
+cd Relight_Video
 
 conda create -n HiLight python=3.10
 conda activate HiLight
