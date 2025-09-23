@@ -1,5 +1,5 @@
 ## 💡 Demo
-### ‼️Demo videos can be found in the supplementary material.‼️
+### ‼️Demo videos can be found in the  <span style="color: #008000;">supplementary material.</span>‼️
 <div align="center">
 
 [![]](https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c)
@@ -27,7 +27,7 @@
 
 ## Installation
 We used Python 3.10.16
-```
+```bash
 git clone "THIS REPO"
 cd Relight_Video
 
