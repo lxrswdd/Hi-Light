@@ -58,11 +58,11 @@ python ./utils/split_long_video.py --input_video_path './demo/man_taking_notes.m
 ```bash
 
 # run the demo script
-python ./run_relight_Beta.py --raw_input_video ./demo/woman_holding_a_coffee_1.mp4 \
+python run_relight_Beta.py --raw_input_video ./demo/woman_holding_a_coffee_1.mp4 \
 --config ./configs/wan_relight/woman_holding_a_coffee.yaml
 ```
 ### 3. To evaluate the relit video
-```
+```bash
 python relit_video_evaluation.py --raw_video_path "Path to your raw input video" --relit_video_path "Path to the relit video"
 ```
 
