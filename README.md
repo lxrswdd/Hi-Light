@@ -1,5 +1,5 @@
 ## 💡 Demo
-### ‼️Demo videos can be found in the  <span style="color: #008000;">supplementary material.</span>‼️
+### ‼️Demo videos can be found in the supplementary material.‼️
 <div align="center">
 
 [![]](https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c)
