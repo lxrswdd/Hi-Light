@@ -6,10 +6,10 @@ n_prompt: bad quality, worse quality
 num_frames: 81
 num_step: 10
 relight_prompt: sunset lighting
-save_path: /scratch/xiangrui/project/video_edit/Light-A-Video/test_out/wan21/method_old/sea_gull_3_81FS_20250913-131749
+save_path: ./
 seed: 42
 strength: 0.3
 text_guide_scale: 2
 vdm_prompt: a sea gull standing on a pole
-video_path: /scratch/xiangrui/project/video_edit/Light-A-Video/test_out/wan21/method_old/sea_gull_3_81FS_20250913-131749/Intermediate_downsized_video.mp4
+video_path: ./
 width: 480
