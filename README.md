@@ -1,5 +1,6 @@
 ## 💡 Demo
-### ‼️Gifs have poor quality. Original Demo videos can be found in the supplementary material.‼️
+### ‼️Gifs have poor quality and may look laggy in the anonymised link. 
+### Original Demo videos can be found in the supplementary material.‼️
 <div align="center">
 
 [![]](https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c)
