@@ -12,6 +12,14 @@
       <td><p style="text-align: center">Sunset lighting over sea</p></td>
     </tr>
     <tr>
+      <td><img src="__assets__/demo_captioned_720p.gif"></td>
+      <td><img src="__assets__/sea_gull_1_sunset.gif"></td>
+    </tr>
+    <tr>
+      <td><p style="text-align: center">Input video</p></td>
+      <td><p style="text-align: center">Sunset lighting over sea</p></td>
+    </tr>
+    <tr>
       <td><img src="__assets__/sea_gull_1.gif"></td>
       <td><img src="__assets__/sea_gull_1_sunset.gif"></td>
     </tr>
