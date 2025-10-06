@@ -8,12 +8,12 @@
 
 <table class="center">
     <tr>
-      <td><p style="text-align: center">Input video</p></td>
-      <td><p style="text-align: center">Sunset lighting over sea</p></td>
+      <td><p style="text-align: center">Demo 1</p></td>
+      <td><p style="text-align: center">Demo 2</p></td>
     </tr>
     <tr>
       <td><img src="__assets__/demo_captioned_720p.gif"></td>
-      <td><img src="__assets__/sea_gull_1_sunset.gif"></td>
+      <td><img src="__assets__/demo2_captioned_720p.gif"></td>
     </tr>
     <tr>
       <td><p style="text-align: center">Input video</p></td>
