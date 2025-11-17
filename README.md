@@ -1,17 +1,28 @@
-
 <table class="center">
     <tr>
       <td><p style="text-align: center">Demo 1</p></td>
       <td><p style="text-align: center">Demo 2</p></td>
-      <td><p style="text-align: center">Demo 2</p></td>
-
     </tr>
     <tr>
       <td><img src="__assets__/demo_captioned_720p2.gif"></td>
       <td><img src="__assets__/demo2_captioned_720p2.gif"></td>
-      <td><img src="__assets__/demo2_captioned_720p2.gif"></td>
     </tr>
-    
+    <tr>
+      <td><p style="text-align: center">Input video</p></td>
+      <td><p style="text-align: center">Sunset lighting over sea</p></td>
+    </tr>
+    <tr>
+      <td><img src="__assets__/sea_gull_1.gif"></td>
+      <td><img src="__assets__/sea_gull_1_sunset.gif"></td>
+    </tr>
+    <tr>
+      <td><p style="text-align: center">Input video </p></td>
+      <td><p style="text-align: center">Green aurora lighting</p></td>
+    </tr>
+    <tr>
+      <td><img src="__assets__/1440p_woman.gif"></td>
+      <td><img src="__assets__/1440p_woman_aurora.gif"></td>
+    </tr>
 </table>
 
 ## 💡 Demo
