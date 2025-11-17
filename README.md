@@ -1,18 +1,15 @@
-<table class="center">
-    <tr>
-      <td><p style="text-align: center">Demo 1</p></td>
-      <td><p style="text-align: center">Demo 2</p></td>
-      <td><p style="text-align: center">Demo 3</p></td>
-
-    </tr>
-    <tr>
-      <td><img src="__assets__/compare/hilight.gif"></td>
-      <td><img src="__assets__/demo2_captioned_720p2.gif"></td>
-      <td><img src="__assets__/1440p_woman.gif"></td>
-    </tr>
-   
+<table>
+  <tr>
+    <td align="center"><b>Demo 1</b></td>
+    <td align="center"><b>Demo 2</b></td>
+    <td align="center"><b>Demo 3</b></td>
+  </tr>
+  <tr>
+    <td><img src="__assets__/compare/hilight.gif" width="250"></td>
+    <td><img src="__assets__/demo2_captioned_720p2.gif" width="250"></td>
+    <td><img src="__assets__/1440p_woman.gif" width="250"></td>
+  </tr>
 </table>
-
 ## 💡 Demo
 ### ‼️Gifs have poor quality and may look laggy in the anonymised link. 
 ### Original Demo videos can be found in the supplementary material.‼️
