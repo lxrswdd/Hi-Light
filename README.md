@@ -2,10 +2,13 @@
     <tr>
       <td><p style="text-align: center">Demo 1</p></td>
       <td><p style="text-align: center">Demo 2</p></td>
+      <td><p style="text-align: center">Demo 3</p></td>
+
     </tr>
     <tr>
       <td><img src="__assets__/compare/hilight.gif"></td>
       <td><img src="__assets__/demo2_captioned_720p2.gif"></td>
+      <td><img src="__assets__/1440p_woman.gif"></td>
     </tr>
     <tr>
       <td><p style="text-align: center">Input video</p></td>
