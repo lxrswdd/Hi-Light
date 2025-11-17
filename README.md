@@ -9,7 +9,7 @@
   
   </tr>
       <td><img src="__assets__/compare/input.gif" width="250"></td>
-      <td><img src="__assets__/compare/hilight.gif" width="250"></td>
+      <td><img src="__assets__/compare/hilight_1080p.gif" width="250"></td>
       <td><img src="__assets__/compare/lav-animatediff.gif" width="250"></td>
   </tr>
   
