@@ -12,17 +12,19 @@ A visual comparison among the baselines.
       <td><img src="__assets__/compare/hilight.gif" width="250"></td>
       <td><img src="__assets__/compare/lav-animatediff.gif" width="250"></td>
   </tr>
+  
   <tr>
     <td align="center"><b>LAV(CogVideoX)</b></td>
     <td align="center"><b>LAV(Wan)</b></td>
     <td align="center"><b>TC-Light</b></td>
-  </tr>tr>  
+  </tr>
+  
   <tr>
     <td><img src="__assets__/compare/lav-cog.gif" width="250"></td>
     <td><img src="__assets__/compare/lav-wan.gif" width="250"></td>
     <td><img src="__assets__/compare/tclight.gif" width="250"></td>
-
   </tr>
+  
 </table>
 ## 💡 Demo
 ### ‼️Gifs have poor quality and may look laggy in the anonymised link. 
