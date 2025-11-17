@@ -26,6 +26,9 @@
   </tr>
   
 </table>
+
+# Demonstration of direction-controlled relighting.
+
 ## 💡 Demo
 ### ‼️Gifs have poor quality and may look laggy in the anonymised link. 
 ### Original Demo videos can be found in the supplementary material.‼️
