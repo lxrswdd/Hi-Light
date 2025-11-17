@@ -1,4 +1,4 @@
-## A visual comparison among the baselines.
+# A visual comparison among the baselines.
 <table>
   <tr>
     <td align="center"><b>Input Video</b></td>
