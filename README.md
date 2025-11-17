@@ -1,3 +1,4 @@
+A visual comparison among the baselines.
 <table>
   <tr>
     <td align="center"><b>Hi-Light (ours)</b></td>
