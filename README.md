@@ -1,13 +1,19 @@
 <table>
   <tr>
-    <td align="center"><b>Demo 1</b></td>
-    <td align="center"><b>Demo 2</b></td>
-    <td align="center"><b>Demo 3</b></td>
+    <td align="center"><b>Hi-Light (ours)</b></td>
+    <td align="center"><b>LAV(AnimateDiff)</b></td>
+    <td align="center"><b>LAV(CogVideoX)</b></td>
+    <td align="center"><b>LAV(Wan)</b></td>
+    <td align="center"><b>TC-Light</b></td>
+
   </tr>
   <tr>
     <td><img src="__assets__/compare/hilight.gif" width="250"></td>
-    <td><img src="__assets__/demo2_captioned_720p2.gif" width="250"></td>
-    <td><img src="__assets__/1440p_woman.gif" width="250"></td>
+    <td><img src="__assets__/compare/lav-animatediff.gif" width="250"></td>
+    <td><img src="__assets__/compare/lav-cog.gif" width="250"></td>
+    <td><img src="__assets__/compare/lav-wan.gif" width="250"></td>
+    <td><img src="__assets__/compare/tclight.gif" width="250"></td>
+
   </tr>
 </table>
 ## 💡 Demo
