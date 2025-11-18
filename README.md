@@ -38,9 +38,9 @@
   </tr>
   
   </tr>
-      <td><img src="__assets__/compare/input2.gif" width="350"></td>
-      <td><img src="__assets__/compare/hilight2.gif" width="350"></td>
-      <td><img src="__assets__/compare/animatediff2.gif" width="350"></td>
+      <td><img src="__assets__/compare/input2.gif" width="250"></td>
+      <td><img src="__assets__/compare/hilight2.gif" width="250"></td>
+      <td><img src="__assets__/compare/animatediff2.gif" width="250"></td>
   </tr>
   
   <tr>
