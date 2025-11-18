@@ -1,4 +1,4 @@
-# A visual comparison among the baselines.
+# 🎃A visual comparison among the baselines.
 
 ## Relight Prompt: "Green and purple aurora light."
 ## Direction: Right
@@ -61,7 +61,7 @@
   
 </table>
 
-# Demonstration of direction-controlled relighting.
+# 🎃Demonstration of direction-controlled relighting.
 
 
 # High camera motion speed relighting demonstration.
