@@ -1,5 +1,5 @@
 ## 💡 Demo
-# ‼️Gifs have poor quality and may look laggy in the anonymised link. ‼️
+# ‼️Gifs have poor quality and may look laggy in the anonymised link.‼️
 
 # 🎃A visual comparison among the baselines.
 
@@ -64,7 +64,7 @@
   
 </table>
 
-# 🎃Demonstration of direction-controlled relighting.
+# 👻Demonstration of direction-controlled relighting.
 
 ## Relight Prompt: "Torch flame light"
 
@@ -89,7 +89,7 @@
 </table>
 
 
-# 🎃High camera motion speed relighting demonstration.
+# 🎅High camera motion speed relighting demonstration.
 
 <table class="center">
     <tr>
