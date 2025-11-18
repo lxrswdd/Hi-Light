@@ -64,7 +64,7 @@
 # 🎃Demonstration of direction-controlled relighting.
 
 
-# High camera motion speed relighting demonstration.
+# 🎃High camera motion speed relighting demonstration.
 
 
 <table class="center">
