@@ -29,6 +29,9 @@
   
 </table>
 
+## Relight Prompt: "Sunset light."
+
+
 <table>
   <tr>
     <td align="center"><b>Input Video</b></td>
