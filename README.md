@@ -66,6 +66,7 @@
 
 # 🎃Demonstration of direction-controlled relighting.
 
+## Relight Prompt: "Torch flame light"
 
 <table class="center">
     <tr>
