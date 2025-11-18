@@ -66,6 +66,28 @@
 
 # 🎃Demonstration of direction-controlled relighting.
 
+
+<table class="center">
+    <tr>
+      <td><p style="text-align: center">Left</p></td>
+      <td><p style="text-align: center">Right</p></td>
+    </tr>
+    <tr>
+      <td><img src="__assets__/left.gif"></td>
+      <td><img src="__assets__/right.gif"></td>
+    </tr>
+    <tr>
+      <td><p style="text-align: center">Top</p></td>
+      <td><p style="text-align: center">Bottom</p></td>
+    </tr>
+    <tr>
+      <td><img src="__assets__/top.gif"></td>
+      <td><img src="__assets__/bottom.gif"></td>
+    </tr>
+
+</table>
+
+
 # 🎃High camera motion speed relighting demonstration.
 
 <table class="center">
