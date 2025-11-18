@@ -1,6 +1,7 @@
 # A visual comparison among the baselines.
 
 ## Relight Prompt: "Green and purple aurora light."
+## Direction: Right
 <table>
   <tr>
     <td align="center"><b>Input Video</b></td>
@@ -29,8 +30,8 @@
   
 </table>
 
-## Relight Prompt: "Sunset light."
-
+## Relight Prompt: "Warm orange light."
+## Direction: Left
 
 <table>
   <tr>
