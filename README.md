@@ -116,7 +116,7 @@
 </table>
 
 ## Installation
-We used Python 3.10.16
+We used Python=3.10.16
 ```bash
 git clone "THIS REPO"
 cd Relight_Video
