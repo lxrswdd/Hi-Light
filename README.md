@@ -1,4 +1,6 @@
 # A visual comparison among the baselines.
+
+## Relight Prompt: "Green and purple aurora light."
 <table>
   <tr>
     <td align="center"><b>Input Video</b></td>
