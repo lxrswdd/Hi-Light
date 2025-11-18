@@ -73,7 +73,7 @@
       <td><p style="text-align: center">Demo 2</p></td>
     </tr>
     <tr>
-      <td><img src="__assets__/camera/manlocking_1080p.gif"></td>
+      <td><img src="__assets__/camera/camera.gif"></td>
       <td><img src="__assets__/camera/parachute1080p.gif"></td>
     </tr>
     <tr>
