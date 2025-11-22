@@ -105,13 +105,13 @@
 </table>
 
 
-# Demo of different merge strength beta in LAB-DF
+# Demo of different merge strength (β) in LAB-DF
 
 <table>
   <tr>
     <td align="center"><b>Input Video</b></td>
-    <td align="center"><b>MS=0.1</b></td>
-    <td align="center"><b>MS=0.3</b></td>
+    <td align="center"><b>β=0.1</b></td>
+    <td align="center"><b>β=0.3</b></td>
 
   </tr>
   
@@ -122,9 +122,9 @@
   </tr>
   
   <tr>
-    <td align="center"><b>MS=0.5</b></td>
-    <td align="center"><b>MS=0.7</b></td>
-    <td align="center"><b>MS=0.9</b></td>
+    <td align="center"><b>β=0.5</b></td>
+    <td align="center"><b>β=0.7</b></td>
+    <td align="center"><b>β=0.9</b></td>
   </tr>
   
   <tr>
