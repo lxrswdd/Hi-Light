@@ -133,18 +133,7 @@
     <td><img src="__assets__/MS/ms9.gif" width="250"></td>
   </tr>
 
-    <tr>
-    <td align="center"><b>Input Video</b></td>
-    <td align="center"><b>β=0.3</b></td>
-    <td align="center"><b>β=0.3 refined</b></td>
-  </tr>
-  
-  <tr>
-    <td><img src="__assets__/MS/ms_in.gif" width="250"></td>
-    <td><img src="__assets__/MS/ms3.gif" width="250"></td>
-    <td><img src="__assets__/MS/MS3_refined.gif" width="250"></td>
-  </tr>
-  
+
 </table>
 
 
