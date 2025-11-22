@@ -105,6 +105,38 @@
 </table>
 
 
+# Demo of different merge strength beta in LAB-DF
+
+<table>
+  <tr>
+    <td align="center"><b>Input Video</b></td>
+    <td align="center"><b>MS=0.1</b></td>
+    <td align="center"><b>MS=0.3</b></td>
+
+  </tr>
+  
+  </tr>
+      <td><img src="__assets__/MS/ms_in.gif" width="250"></td>
+      <td><img src="__assets__/MS/ms1.gif" width="250"></td>
+      <td><img src="__assets__/MS/ms3.gif" width="250"></td>
+  </tr>
+  
+  <tr>
+    <td align="center"><b>MS=0.5</b></td>
+    <td align="center"><b>MS=0.7</b></td>
+    <td align="center"><b>MS=0.9</b></td>
+  </tr>
+  
+  <tr>
+    <td><img src="__assets__/MS/ms5.gif" width="250"></td>
+    <td><img src="__assets__/MS/ms7.gif" width="250"></td>
+    <td><img src="__assets__/MS/ms9.gif" width="250"></td>
+  </tr>
+  
+</table>
+
+
+
 
 ### Original Demo videos can be found in the supplementary material.‼️
 <div align="center">
