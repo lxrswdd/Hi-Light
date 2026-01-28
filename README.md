@@ -1,6 +1,12 @@
 ## 💡 Demo
 
 
+<div align="center">
+
+[![]](https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c)
+
+</div>
+
 # 👻Demonstration of direction-controlled relighting.
 
 ## Relight Prompt: "Torch flame light"
@@ -29,12 +35,6 @@
 
 
 
-
-<div align="center">
-
-[![]](https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c)
-
-</div>
 
 <table class="center">
     <tr>
