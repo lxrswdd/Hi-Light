@@ -1,4 +1,4 @@
-# HI-LIGHT: A Path To High-fidelity, Hi-resolution Video Relighting With A Novel Evaluation Paradigm
+# Hi-Light: A Path To High-fidelity, Hi-resolution Video Relighting With A Novel Evaluation Paradigm
 
 
 
