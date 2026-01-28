@@ -1,7 +1,4 @@
 ## 💡 Demo
-# ‼️Gifs have poor quality and may look laggy in the anonymised link.‼️
-
-# 🎃A visual comparison among the baselines.
 
 
 # 👻Demonstration of direction-controlled relighting.
