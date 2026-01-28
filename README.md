@@ -49,7 +49,7 @@
     </tr>
 </table>
 
-## 🔧Installation🔧
+## 🔧Installation
 We used Python=3.10.16
 ```bash
 git clone https://github.com/lxrswdd/Hi-Light.git
@@ -61,7 +61,7 @@ conda activate HiLight
 pip install -r requirements.txt
 ```
 
-## ⭐️Quick Start⭐️
+## ⭐️Quick Start
 ## Input Video specification
 
 The framework supports the Wan2.1 and CogVideoX diffusion backbones, supporting frame numbers of 49 and 81 (theoretically supports 4n+1 frames).
