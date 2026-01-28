@@ -107,8 +107,6 @@ python relit_video_evaluation.py --raw_video_path "Path to your raw input video"
 ```
 
 
-
-
 ## 📣 Disclaimer
 
 This is the official code of Hi-Light.
