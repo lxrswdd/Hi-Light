@@ -82,7 +82,7 @@ python ./utils/split_long_video.py --input_video_path './demo/man_taking_notes.m
 ```bash
 
 # run the demo script
-python run_relight_Beta.py --raw_input_video ./demo/woman_holding_a_coffee_1.mp4 \ #Change to your path
+python run_relight.py --raw_input_video ./demo/woman_holding_a_coffee_1.mp4 \ #Change to your path
 --config ./configs/wan_relight/woman_holding_a_coffee.yaml #edit the prompts in the yaml file
 ```
 ### 3. Evaluate the relit video
