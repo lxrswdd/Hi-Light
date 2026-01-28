@@ -3,66 +3,6 @@
 
 # 🎃A visual comparison among the baselines.
 
-## Relight Prompt: "Green and purple aurora light."
-## Direction: Right
-<table>
-  <tr>
-    <td align="center"><b>Input Video</b></td>
-    <td align="center"><b>Hi-Light (ours)</b></td>
-    <td align="center"><b>LAV(AnimateDiff)</b></td>
-
-  </tr>
-  
-  </tr>
-      <td><img src="__assets__/compare/input.gif" width="250"></td>
-      <td><img src="__assets__/compare/hilight_1080p.gif" width="250"></td>
-      <td><img src="__assets__/compare/lav-animatediff.gif" width="250"></td>
-  </tr>
-  
-  <tr>
-    <td align="center"><b>LAV(CogVideoX)</b></td>
-    <td align="center"><b>LAV(Wan)</b></td>
-    <td align="center"><b>TC-Light</b></td>
-  </tr>
-  
-  <tr>
-    <td><img src="__assets__/compare/lav-cog.gif" width="250"></td>
-    <td><img src="__assets__/compare/lav-wan.gif" width="250"></td>
-    <td><img src="__assets__/compare/tclight.gif" width="250"></td>
-  </tr>
-  
-</table>
-
-## Relight Prompt: "Warm orange light."
-## Direction: Left
-
-<table>
-  <tr>
-    <td align="center"><b>Input Video</b></td>
-    <td align="center"><b>Hi-Light (ours)</b></td>
-    <td align="center"><b>LAV(AnimateDiff)</b></td>
-
-  </tr>
-  
-  </tr>
-      <td><img src="__assets__/compare/input2.gif" width="250"></td>
-      <td><img src="__assets__/compare/hilight2.gif" width="250"></td>
-      <td><img src="__assets__/compare/animatediff2.gif" width="250"></td>
-  </tr>
-  
-  <tr>
-    <td align="center"><b>LAV(CogVideoX)</b></td>
-    <td align="center"><b>LAV(Wan)</b></td>
-    <td align="center"><b>TC-Light</b></td>
-  </tr>
-  
-  <tr>
-    <td><img src="__assets__/compare/cog2.gif" width="250"></td>
-    <td><img src="__assets__/compare/wan2.gif" width="250"></td>
-    <td><img src="__assets__/compare/tclight2.gif" width="250"></td>
-  </tr>
-  
-</table>
 
 # 👻Demonstration of direction-controlled relighting.
 
