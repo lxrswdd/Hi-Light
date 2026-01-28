@@ -32,14 +32,6 @@
 
 <table class="center">
     <tr>
-      <td><p style="text-align: center">Demo 1</p></td>
-      <td><p style="text-align: center">Demo 2</p></td>
-    </tr>
-    <tr>
-      <td><img src="__assets__/demo_captioned_720p2.gif"></td>
-      <td><img src="__assets__/demo2_captioned_720p2.gif"></td>
-    </tr>
-    <tr>
       <td><p style="text-align: center">Input video</p></td>
       <td><p style="text-align: center">Sunset lighting over sea</p></td>
     </tr>
