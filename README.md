@@ -62,11 +62,11 @@ pip install -r requirements.txt
 ```
 
 ## ⭐️Quick Start
-## Input Video specification
+## Input specification
 
-The framework supports the Wan2.1 and CogVideoX diffusion backbones, supporting frame numbers of 49 and 81 (theoretically supports 4n+1 frames).
-
-Ensure the video has a resolution >= 480p.
+- The framework supports the Wan2.1 and CogVideoX d iffusion backbones (The checkpoints will be downloaded automatically).
+- Supporting frame numbers 4n+1.Frames of 49 and 81 have been tested.
+- Ensure the video has a resolution >= 480p.
 
 ### 1. To split a long video into video segments of the desired number of frames and fps
 
