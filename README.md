@@ -8,9 +8,7 @@
 
 </div>
 
-# 👻Demonstration of direction-controlled relighting.
-
-## Relight Prompt: "Torch flame light"
+# 👻Direction-controlled relighting.
 
 <table class="center">
     <tr>
