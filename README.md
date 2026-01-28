@@ -68,8 +68,8 @@
 ## Installation
 We used Python=3.10.16
 ```bash
-git clone "THIS REPO"
-cd Relight_Video
+git clone https://github.com/lxrswdd/Hi-Light.git
+cd Hi-Light
 
 conda create -n HiLight python=3.10
 conda activate HiLight
@@ -80,7 +80,7 @@ pip install -r requirements.txt
 ##  Quick Start
 ## Input Video specification
 
-The framework supports the Wan2.1 and CogVideoX diffusion backbones, supporting frame numbers of 49 and 81 (theoretically supports 8n+1 frames).
+The framework supports the Wan2.1 and CogVideoX diffusion backbones, supporting frame numbers of 49 and 81 (theoretically supports 4n+1 frames).
 
 Ensure the video has a resolution >= 480p.
 
