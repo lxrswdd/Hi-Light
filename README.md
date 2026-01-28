@@ -89,58 +89,10 @@
 </table>
 
 
-# 🎅High camera motion speed relighting demonstration.
-
-<table class="center">
-    <tr>
-      <td><p style="text-align: center">Demo 1</p></td>
-      <td><p style="text-align: center">Demo 2</p></td>
-    </tr>
-    <tr>
-      <td><img src="__assets__/camera/camera.gif"></td>
-      <td><img src="__assets__/camera/parachute1080p.gif"></td>
-    </tr>
-    <tr>
-    </tr>
-</table>
-
-
-# Demo of different merge strength (β) in LAB-DF
-
-<table>
-  <tr>
-    <td align="center"><b>Input Video</b></td>
-    <td align="center"><b>β=0.1</b></td>
-    <td align="center"><b>β=0.3</b></td>
-
-  </tr>
-  
-  </tr>
-      <td><img src="__assets__/MS/ms_in.gif" width="250"></td>
-      <td><img src="__assets__/MS/ms1.gif" width="250"></td>
-      <td><img src="__assets__/MS/ms3.gif" width="250"></td>
-  </tr>
-  
-  <tr>
-    <td align="center"><b>β=0.5</b></td>
-    <td align="center"><b>β=0.7</b></td>
-    <td align="center"><b>β=0.9</b></td>
-  </tr>
-  
-  <tr>
-    <td><img src="__assets__/MS/ms5.gif" width="250"></td>
-    <td><img src="__assets__/MS/ms7.gif" width="250"></td>
-    <td><img src="__assets__/MS/ms9.gif" width="250"></td>
-  </tr>
-
-
-</table>
 
 
 
 
-
-### Original Demo videos can be found in the supplementary material.‼️
 <div align="center">
 
 [![]](https://github.com/user-attachments/assets/becdc6bb-5238-4817-84e3-5b90f7a7313c)
