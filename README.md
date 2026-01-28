@@ -94,7 +94,7 @@ python ./utils/split_long_video.py --input_video_path './demo/man_taking_notes.m
 ```
 
 
-### 2. To run the video relighting pipeline: Change the following path to yours and edit the prompts in the yaml configuration file.
+### 2. Run relighting pipeline: Change the path and edit the prompts in the yaml configuration file.
 ```bash
 
 # run the demo script
