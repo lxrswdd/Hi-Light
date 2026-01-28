@@ -113,5 +113,10 @@ This is the official code of Hi-Light.
 The copyrights of some of the demo videos are from community users. 
 Feel free to contact us if you would like to remove them.
 
+## 💞 Acknowledgements
+The code is built upon the below repositories, we thank all the contributors for open-sourcing.
+* [Light-A-Video][Light-A-Video](https://github.com/bcmi/Light-A-Video)
+* [CogVideoX](https://github.com/THUDM/CogVideo)
+* [Wan2.1](https://github.com/Wan-Video/Wan2.1)
 
 
