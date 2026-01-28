@@ -64,11 +64,11 @@ pip install -r requirements.txt
 ## ⭐️Quick Start
 ## Input specification
 
-- The framework supports the Wan2.1 and CogVideoX d iffusion backbones (The checkpoints will be downloaded automatically).
+- The framework supports the Wan2.1 and CogVideoX diffusion backbones (The checkpoints will be downloaded automatically).
 - Supporting frame numbers 4n+1.Frames of 49 and 81 have been tested.
 - Ensure the video has a resolution >= 480p.
 
-### 1. To split a long video into video segments of the desired number of frames and fps
+### 1. Split a long video into video segments of the desired number of frames and fps
 
 ```bash
 python ./utils/split_long_video.py --input_video_path './demo/man_taking_notes.mp4' \
@@ -78,14 +78,14 @@ python ./utils/split_long_video.py --input_video_path './demo/man_taking_notes.m
 ```
 
 
-### 2. Run relighting pipeline: Change the path and edit the prompts in the yaml configuration file.
+### 2. Run the relighting pipeline
 ```bash
 
 # run the demo script
-python run_relight_Beta.py --raw_input_video ./demo/woman_holding_a_coffee_1.mp4 \
---config ./configs/wan_relight/woman_holding_a_coffee.yaml
+python run_relight_Beta.py --raw_input_video ./demo/woman_holding_a_coffee_1.mp4 \ #Change to your path
+--config ./configs/wan_relight/woman_holding_a_coffee.yaml #edit the prompts in the yaml file
 ```
-### 3. To evaluate the relit video
+### 3. Evaluate the relit video
 ```bash
 python relit_video_evaluation.py --raw_video_path "Path to your raw input video" --relit_video_path "Path to the relit video"
 ```
