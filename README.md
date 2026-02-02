@@ -1,4 +1,6 @@
 # Hi-Light: A Path To High-fidelity, Hi-resolution Video Relighting With A Novel Evaluation Paradigm
+This repository is the official implementation of Hi-Light. It is a **training-free framework** that enables 
+text prompt-driven relighting of given video sequences.
 
 [![arXiv](https://img.shields.io/badge/arXiv-2502.08590-b31b1b.svg)](https://arxiv.org/abs/2601.23167)
 
