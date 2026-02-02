@@ -2,6 +2,11 @@
 This repository is the official implementation of Hi-Light. It is a **training-free framework** that enables 
 text prompt-driven relighting of given video sequences.
 
+<details><summary>Click for the full abstract of Light-A-Video</summary>
+
+> Video relighting offers immense creative potential and commercial value but is hindered by challenges, including the absence of an adequate evaluation metric, severe light flickering, and the degradation of fine-grained details during editing. To overcome these challenges, we introduce Hi-Light, a novel, training-free framework for high-fidelity, high-resolution, robust video relighting. Our approach introduces three technical innovations: lightness prior anchored guided relighting diffusion that stabilises intermediate relit video, a Hybrid Motion-Adaptive Lighting Smoothing Filter that leverages optical flow to ensure temporal stability without introducing motion blur, and a LAB-based Detail Fusion module that preserves high-frequency detail information from the original video. Furthermore, to address the critical gap in evaluation, we propose the Light Stability Score, the first quantitative metric designed to specifically measure lighting consistency. Extensive experiments demonstrate that Hi-Light significantly outperforms state-of-the-art methods in both qualitative and quantitative comparisons, producing stable, highly detailed relit videos.
+</details>
+
 [![arXiv](https://img.shields.io/badge/arXiv-2502.08590-b31b1b.svg)](https://arxiv.org/abs/2601.23167)
 
 <div align="center">
