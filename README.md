@@ -96,6 +96,16 @@ python run_relight.py --raw_input_video ./demo/woman_holding_a_coffee_1.mp4 \ #C
 ```bash
 python relit_video_evaluation.py --raw_video_path "Path to your raw input video" --relit_video_path "Path to the relit video"
 ```
+## Citation 
+```
+@inproceedings{liu2026hi,
+  title={Hi-Light: A Path to High-fidelity, High-resolution Video Relighting With A Refined Evaluation Paradigm},
+  author={Liu, Xiangrui and Li, Haoxiang and Yang, Yezhou},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={6022--6030},
+  year={2026}
+}
+```
 
 
 ## 📣 Disclaimer
